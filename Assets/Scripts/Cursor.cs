@@ -11,10 +11,10 @@ public class Cursor : Token
     public Sprite sprCross;
 
     //カーソルにあるオブジェクト
-    GameObject _setObj = null;
+    GameObject _selObj = null;
     public GameObject SelObj
     {
-        get { return _setObj; }
+        get { return _selObj; }
     }
 
     //配置可能かどうか
@@ -48,7 +48,7 @@ public class Cursor : Token
         Y = (int)Mathf.Round(posWorld.y);
 
         //画面外に出たら非表示
-        if(Y < 0.0f)
+        if (Y < 0.0f)
         {
 
             SetSprite(null);
@@ -57,15 +57,26 @@ public class Cursor : Token
         SetSprite(sprRect);
 
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        _bPlaceable = false;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        _bPlaceable = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -34,6 +34,11 @@ public class GameMgr : MonoBehaviour
     int _select_end;
     //キャラの種類
     int _charNum;
+
+    // 選択中のオブジェクト
+    GameObject _selObj = null;
+    // 選択中のタワー
+    Chara _selTower = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +80,7 @@ public class GameMgr : MonoBehaviour
             Enemy.Add(p);
         }
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -111,7 +116,15 @@ public class GameMgr : MonoBehaviour
         }
 
         //カーソルの下のキャラを取得
-        if(_charaList.Get((int)_cursor.X, (int)_cursor.Y) != 0)
+        SetSelObj();
+
+        //キャラがいる時
+        if (!_cursor.Placeable)
+        {
+            return;
+        }
+
+        if (_charNum == 0)
         {
             return;
         }
@@ -121,7 +134,7 @@ public class GameMgr : MonoBehaviour
         {
 
             //キャラを生成
-            Chara.Add(_cursor.X , _cursor.Y,_charNum);
+            Chara.Add(_cursor.X, _cursor.Y, _charNum);
             _charaList.Set((int)_cursor.X, (int)_cursor.Y, _charNum);
         }
     }
@@ -158,8 +171,21 @@ public class GameMgr : MonoBehaviour
 
     }
 
-    void MoveChara(int s,int e)
+    void MoveChara(int s, int e)
     {
 
+    }
+
+    void SetSelObj()
+    {
+        // カーソルの下にあるオブジェクトをチェック
+        int mask = 1 << LayerMask.NameToLayer("Chara");
+        Collider2D col = Physics2D.OverlapPoint(_cursor.GetPosition(), mask);
+        _selObj = null;
+        if (col != null)
+        {
+            // 選択中のオブジェクトを格納
+            _selObj = col.gameObject;
+        }
     }
 }

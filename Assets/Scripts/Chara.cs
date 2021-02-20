@@ -7,12 +7,12 @@ public class Chara : Token
     SpriteRenderer spriteRenderer;
     //キャラ管理
     public static TokenMgr<Chara> parent;
-    public  Sprite[] faces;
+    public Sprite[] faces;
     //タワー生成
     public static Token Add(float px, float py, int n)
     {
         Chara c = parent.Add(px, py);
-        if(c == null)
+        if (c == null)
         {
             return null;
         }
@@ -28,14 +28,14 @@ public class Chara : Token
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void Init(int n)
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = faces[n];
-        
+
     }
 
     //キャラを移動させる
@@ -44,8 +44,7 @@ public class Chara : Token
         X = X + 1;
     }
 
-    void  OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(other.gameObject);
     }
 }
