@@ -36,4 +36,12 @@ public class Enemy : Token
     {
         
     }
+
+     void OnTriggerEnter2D(Collider2D other) {
+
+        //陣地に敵が到着した時
+        if(other.gameObject.tag == "DeadLine"){
+        MyCanvas.SetActive("TextGameover", true);     
+        }
+    }
 }

@@ -18,6 +18,9 @@ public class GameMgr : MonoBehaviour
     //カーソル
     Cursor _cursor;
 
+    // GUI管理
+    Gui _gui;
+
     //カメラ
     Screen _screen;
 
@@ -34,11 +37,16 @@ public class GameMgr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // ゲームパラメータ初期化 
+        Global.Init();
         //敵生成を管理
         Enemy.parent = new TokenMgr<Enemy>("Enemy", 128);
         //タワー生成を生成
         Chara.parent = new TokenMgr<Chara>("Chara", 64);
         //マップ管理を生成
+
+        // GUIを生成
+        _gui = new Gui();
         //プレハブを取得
         GameObject prefab = null;
         prefab = Util.GetPrefab(prefab, "Field");
@@ -71,10 +79,14 @@ public class GameMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // GUIを更新
+        _gui.Update();
         //タイマーを更新
         _tWait -= Time.deltaTime;
         if (_tWait < 0)
         {
+            //三秒ごとにxコスト加算
+            Global.AddCost(1);
             //todo
             MoveChara(_select_start, _select_end);
             //カメラを移動させる
