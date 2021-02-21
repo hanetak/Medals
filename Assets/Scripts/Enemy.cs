@@ -16,6 +16,8 @@ public class Enemy : Token
 
     float _tAtk = 0;
 
+    c 
+
     //管理オブジェクト
     public static TokenMgr<Enemy> parent = null;
 
@@ -66,6 +68,7 @@ public class Enemy : Token
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        //攻撃範囲内に敵がいる時
         if (other.gameObject.tag == "Atk")
         {
             _tAtk -= Time.deltaTime;
