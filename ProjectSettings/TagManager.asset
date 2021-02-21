@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Chara
   - DeadLine
+  - Atk
   layers:
   - Default
   - TransparentFX

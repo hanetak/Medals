@@ -84,6 +84,7 @@ public class GameMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // GUIを更新
         _gui.Update();
         //タイマーを更新
@@ -114,10 +115,6 @@ public class GameMgr : MonoBehaviour
         {
             return;
         }
-
-        //カーソルの下のキャラを取得
-        SetSelObj();
-
         //キャラがいる時
         if (!_cursor.Placeable)
         {
