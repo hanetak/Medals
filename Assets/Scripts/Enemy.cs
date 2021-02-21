@@ -16,7 +16,11 @@ public class Enemy : Token
 
     float _tAtk = 0;
 
-    c 
+    bool _isDmg = false;
+    
+    public bool IsDmg{
+        get{return _isDmg;}
+    }
 
     //管理オブジェクト
     public static TokenMgr<Enemy> parent = null;
@@ -65,27 +69,12 @@ public class Enemy : Token
         ///
 
     }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        //攻撃範囲内に敵がいる時
-        if (other.gameObject.tag == "Atk")
-        {
-            _tAtk -= Time.deltaTime;
-            if (_tAtk < 0)
-            {
-                Damage(3);
-                Debug.Log("3damage");
-                _tAtk = ATK_TIMER;
-            }
-        }
-    }
-
     /// ダメージを受けた
-    void Damage(int val)
+    public void Damage(int val)
     {
         // HPを減らす
         _hp -= val;
+        Debug.Log(val +"のダメージ");
         if (_hp <= 0)
         {
             // HPがなくなったので死亡
