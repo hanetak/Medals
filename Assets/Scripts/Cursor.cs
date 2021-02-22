@@ -60,6 +60,9 @@ public class Cursor : Token
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        if(other.gameObject.tag == "Atk"){
+            return;
+        }
         _bPlaceable = false;
     }
 

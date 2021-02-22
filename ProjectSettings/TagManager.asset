@@ -8,6 +8,7 @@ TagManager:
   - DeadLine
   - Atk
   - Enemy
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Enemy
+  - name: Hp
     uniqueID: 3060875875
+    locked: 0
+  - name: UI
+    uniqueID: 535549753
     locked: 0

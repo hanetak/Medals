@@ -1,9 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Chara : Token
 {
+    //仮置き
+    public int _hp;
+    int max_hp;
+    public int _atk;
+    public int _cost;
+    public int _weight;
+    //Hpスライダー
+    public Slider hpSlider;
+
+
     SpriteRenderer spriteRenderer;
     //キャラ管理
     public static TokenMgr<Chara> parent;
@@ -27,6 +38,8 @@ public class Chara : Token
     // Start is called before the first frame update
     void Start()
     {
+        max_hp = _hp;
+        hpSlider.value = (float)_hp;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -62,11 +75,25 @@ public class Chara : Token
         foreach (Transform child in obj.transform)
         {
             child.GetComponent<AtkRange>().CanVisible();
+            child.GetComponent<AtkRange>().IsDmg = true;           
         }
 
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
+    }
+        /// ダメージを受けた
+    public void DamageC(int val)
+    {
+        // HPを減らす
+        _hp -= val;
+        hpSlider.value =  (float)max_hp / (float)_hp;
+        Debug.Log(_hp);
+        if (_hp <= 0)
+        {
+            // HPがなくなったので死亡
+            Vanish();
+        }
     }
 }

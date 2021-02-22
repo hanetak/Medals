@@ -23,4 +23,6 @@ public class Screen : Token
         x += MOVE_X;
         this.transform.position = new Vector3(x, this.transform.position.y, this.transform.position.z);
     }
+
+
 }
